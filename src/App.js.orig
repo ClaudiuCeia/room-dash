@@ -1,0 +1,24 @@
+import React, { Component } from 'react';
+
+import Stream from './components/Stream';
+import Sensors from './components/Sensors';
+
+import './App.css';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Stream />
+        <Sensors>
+          <div className="header">
+            <i className="fas fa-heartbeat"></i>
+            <h1>Victor Ceia</h1>
+          </div>
+        </Sensors>
+      </div>
+    );
+  }
+}
+
+export default App;

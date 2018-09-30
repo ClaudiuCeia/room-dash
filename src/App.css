@@ -1,0 +1,14 @@
+.header {
+  text-align: center;
+  position: relative;
+}
+
+.header i {
+  font-size: 2em;
+}
+
+h1 {
+  font-size: 1.4em;
+  font-family: 'Indie Flower';
+  margin-bottom: 75px;
+}
