@@ -24,209 +24,251 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import Grid from '@material-ui/core/Grid';
+
+import SensorPanel from './components/SensorPanel/SensorPanel';
+import Stream from './components/Stream/Stream';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-	root: {
-		display: 'flex',
-	},
-	toolbar: {
-		paddingRight: 24, // keep right padding when drawer closed
-	},
-	toolbarIcon: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: '0 8px',
-		...theme.mixins.toolbar,
-	},
-	appBar: {
-		zIndex: theme.zIndex.drawer + 1,
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-	},
-	appBarShift: {
-		marginLeft: drawerWidth,
-		width: `calc(100% - ${drawerWidth}px)`,
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	},
-	menuButton: {
-		marginLeft: 12,
-		marginRight: 36,
-	},
-	menuButtonHidden: {
-		display: 'none',
-	},
-	title: {
-		flexGrow: 1,
-	},
-	drawerPaper: {
-		position: 'relative',
-		whiteSpace: 'nowrap',
-		width: drawerWidth,
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	},
-	drawerPaperClose: {
-		overflowX: 'hidden',
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-		width: theme.spacing.unit * 7,
-		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing.unit * 9,
-		},
-	},
-	appBarSpacer: theme.mixins.toolbar,
-	content: {
-		flexGrow: 1,
-		padding: theme.spacing.unit * 3,
-		height: '100vh',
-		overflow: 'auto',
-	},
-	chartContainer: {
-		marginLeft: -22,
-	},
-	tableContainer: {
-		height: 320,
-	},
+  root: {
+    display: 'flex',
+  },
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: 'none',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing.unit * 7,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9,
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  chartContainer: {
+    marginLeft: -22,
+  },
+  tableContainer: {
+    height: 320,
+  },
 });
 
 class Dashboard extends React.Component {
-	state = {
-		open: true,
-	};
+  state = {
+    open: true,
+  };
 
-	handleDrawerOpen = () => {
-		this.setState({ open: true });
-	};
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
 
-	handleDrawerClose = () => {
-		this.setState({ open: false });
-	};
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
 
-	render() {
-		const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-		return (
-			<React.Fragment>
-				<CssBaseline />
-				<div className={classes.root}>
-					<AppBar
-						position="absolute"
-						className={classNames(
-						classes.appBar, 
-						this.state.open && classes.appBarShift
-						)}>
-						<Toolbar 
-							disableGutters={!this.state.open} 
-							className={classes.toolbar}>
-							<IconButton
-								color="inherit"
-								aria-label="Open drawer"
-								onClick={this.handleDrawerOpen}
-								className={classNames(
-								classes.menuButton,
-								this.state.open && classes.menuButtonHidden,
-								)}>
-								<MenuIcon />
-							</IconButton>
-							<Typography 
-								variant="title" 
-								color="inherit" 
-								noWrap 
-								className={classes.title}>
-								Dashboard
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <div className={classes.root}>
+          <AppBar
+            position="absolute"
+            className={classNames(
+              classes.appBar,
+              this.state.open && classes.appBarShift
+            )}>
+            <Toolbar
+              disableGutters={!this.state.open}
+              className={classes.toolbar}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classNames(
+                  classes.menuButton,
+                  this.state.open && classes.menuButtonHidden,
+                )}>
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="title"
+                color="inherit"
+                noWrap
+                className={classes.title}>
+                Dashboard
 							</Typography>
-							<IconButton color="inherit">
-								<Badge badgeContent={4} color="secondary">
-									<NotificationsIcon />
-								</Badge>
-							</IconButton>
-						</Toolbar>
-					</AppBar>
-					<Drawer
-						variant="permanent"
-						classes={{
-						paper: classNames(
-						classes.drawerPaper, 
-						!this.state.open && classes.drawerPaperClose
-						),
-						}}
-						open={this.state.open}>
-						<div className={classes.toolbarIcon}>
-							<IconButton onClick={this.handleDrawerClose}>
-								<ChevronLeftIcon />
-							</IconButton>
-						</div>
-						<Divider />
-						<List>
-							<div>
-								<ListItem button>
-									<ListItemIcon>
-										<DashboardIcon />
-									</ListItemIcon>
-									<ListItemText primary="Dashboard" />
-								</ListItem>
-								<ListItem button>
-									<ListItemIcon>
-										<ShoppingCartIcon />
-									</ListItemIcon>
-									<ListItemText primary="Orders" />
-								</ListItem>
-								<ListItem button>
-									<ListItemIcon>
-										<PeopleIcon />
-									</ListItemIcon>
-									<ListItemText primary="Customers" />
-								</ListItem>
-								<ListItem button>
-									<ListItemIcon>
-										<BarChartIcon />
-									</ListItemIcon>
-									<ListItemText primary="Reports" />
-								</ListItem>
-								<ListItem button>
-									<ListItemIcon>
-										<LayersIcon />
-									</ListItemIcon>
-									<ListItemText primary="Integrations" />
-								</ListItem>
-							</div>  
-						</List>
-					</Drawer>
-					<main className={classes.content}>
-						<div className={classes.appBarSpacer} />
-						<Typography variant="display1" gutterBottom>
-							Orders
-						</Typography>
-						<Typography 
-							component="div" 
-							className={classes.chartContainer}>
-						</Typography>
-						<Typography variant="display1" gutterBottom>
-							Products
-						</Typography>
-						<div className={classes.tableContainer}>
-						</div>
-					</main>
-				</div>
-			</React.Fragment>
-			);
-}
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: classNames(
+                classes.drawerPaper,
+                !this.state.open && classes.drawerPaperClose
+              ),
+            }}
+            open={this.state.open}>
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={this.handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              <div>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <ShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Orders" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customers" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <BarChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Reports" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemIcon>
+                    <LayersIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Integrations" />
+                </ListItem>
+              </div>
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Grid container spacing={16}>
+              <Grid item xs={4}>
+                <SensorPanel
+                  sensor="bme280"
+                  symbol="°C"
+                  tolerance={3}
+                  index="temperature"
+                  title="Temperatură"
+                  description="Temperatura camerei în ultimele 24h"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <SensorPanel
+                  sensor="bme280"
+                  tolerance={10}
+                  symbol="% RH"
+                  index="humidity"
+                  title="Umiditate"
+                  description="Umiditatea camerei în ultimele 24h"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <SensorPanel
+                  sensor="tsl2561"
+                  tolerance={1000}
+                  symbol="lx"
+                  index="lux"
+                  title="Luminozitate"
+                  description="Iluminarea camerei în ultimele 24h"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <SensorPanel
+                  debug={true}
+                  sensor="tsl2561"
+                  tolerance={1000}
+                  symbol="ir"
+                  index="infrared"
+                  title="Luminozitate infraroșu"
+                  description="Iluminarea infraroșu a camerei în ultimele 24h"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Stream
+                  url="http://192.168.0.38:8555/unicast.m3u8"
+                  title="Stream"
+                  description="Live video stream"
+                />
+              </Grid>
+            </Grid>
+          </main>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 Dashboard.propTypes = {
-	classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Dashboard);
